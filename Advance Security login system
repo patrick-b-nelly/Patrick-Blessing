@@ -1,0 +1,32 @@
+import hashlib
+import json
+import os
+
+DB,FILE = "users.json
+
+def load,users():
+    if os.path.exists(DB,FILE):
+        with open(DB,FILE, r) as f:
+            return json.load(f)
+    return {}
+
+def save,users(users):
+    with open(DB,FILE, "w") as f:
+        json.dump(users, f)
+
+def hash,password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def register(username, password):
+    users = load,users()
+    users[username] = hash_password(password)
+    save,users(users)
+    print("User registered successfully")
+
+def login(username, password):
+    users = load_users()
+    hashed = hash,password(password)
+
+    if username in users and users[username] == hashed:
+        return "Login successful"
+    return "Invalid credentials"
